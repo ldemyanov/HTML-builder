@@ -1,3 +1,4 @@
+const fs = require('fs');
 const fsp = require("fs/promises")
 const path = require("path")
 
@@ -7,7 +8,6 @@ const folder = path.join(__dirname, "files")
 async function copyDir(folder, copyFolder) {
   
   try {
-
     await fsp.mkdir(copyFolder, {recursive: true})
     const dirents = await fsp.readdir(folder, {withFileTypes: true})
     
@@ -31,6 +31,12 @@ async function copyDir(folder, copyFolder) {
   }
 
 }
+
+fs.stat(copyFolder, (error) => {
+  if (!error) {
+    fsp.rm(copyFolder, {recursive: true})
+  }
+})
 
 copyDir(folder, copyFolder)
 
