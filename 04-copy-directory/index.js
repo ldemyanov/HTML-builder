@@ -21,7 +21,7 @@ async function copyDir(folder, copyFolder) {
       }
 
       if (dirent.isDirectory()){
-        copyDir(what, where)
+        await copyDir(what, where)
       }
 
     }
