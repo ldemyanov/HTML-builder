@@ -32,12 +32,7 @@ async function copyDir(folder, copyFolder) {
 
 }
 
-fs.stat(copyFolder, async (error) => {
-  if (!error) {
-    await fsp.rm(copyFolder, {recursive: true})
-  }
+fs.rm(copyFolder, {recursive: true, force: true}, () => {
+  copyDir(folder, copyFolder)
 })
-
-copyDir(folder, copyFolder)
-
 
