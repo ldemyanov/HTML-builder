@@ -1,4 +1,4 @@
-const { createWriteStream, stat} = require("fs")
+const { createWriteStream, rm} = require("fs")
 const fsp = require("fs/promises")
 const path = require("path")
 
@@ -10,11 +10,7 @@ async function build() {
     const folderAssets = path.join(__dirname, "assets")
     const dist = path.join(__dirname, "project-dist")
     const distAssets = path.join(dist, "assets")
-    stat(distAssets, async (error) => {
-      if (!error) {
-        await fsp.rm(distAssets, {recursive: true})
-      }
-    })
+    await fsp.rm(dist, {recursive: true, force: true})
     await fsp.mkdir(dist, {recursive: true})
     await createHtmlBundle(htmlTemplate, folderComponents, dist)
     await createCssBundle(folderStyles, dist)
