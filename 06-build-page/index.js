@@ -1,4 +1,4 @@
-const { createWriteStream, rm} = require("fs")
+const { createWriteStream } = require("fs")
 const fsp = require("fs/promises")
 const path = require("path")
 
